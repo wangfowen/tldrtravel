@@ -1,4 +1,11 @@
 import React from 'react';
-import { App } from './App';
+import { Router, Link } from 'react-router';
+import createBrowserHistory from 'history/lib/createBrowserHistory';
 
-React.render(<App />, document.getElementById('root'));
+import Routes from './Routes';
+
+const history = createBrowserHistory();
+
+React.render(
+  <Router history={history} >{Routes}</Router>,
+  document.getElementById('root'));
