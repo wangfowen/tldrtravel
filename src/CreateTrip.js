@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import {markdown} from 'markdown';
 
+import {RP, getId} from "./common.js"
+import {Text, ViewText, EditText} from "./Text.js"
+import {Day, AddDay} from "./Day.js"
 import "../css/main.scss";
-
-const RP = React.PropTypes;
 
 /**
  * Trip: (Title, [Text | Day])
@@ -12,73 +12,43 @@ const RP = React.PropTypes;
  * Route: ( TBD, (Location, Location))
  */
 
-const getId = function() {
-  return Math.random();
-};
-
-const makeText = function() {
-  return {
-    type: "Text",
-    id: getId(),
-    content: "Here is some content"
-  }
-};
-
-class ViewText extends Component {
-  static propTypes = {
-    id: RP.number.isRequired,
-    content: RP.string.isRequired,
-    setEditedId: RP.func.isRequired,
-  };
-
-  render() {
-    const {id, content, setEditedId} = this.props;
-
-    return (
-      <div onClick={() => setEditedId(id)}
-        dangerouslySetInnerHTML={{__html: markdown.toHTML(content)}} />
-    );
-  }
-}
-
-class EditText extends Component {
-  static propTypes = {
-    id: RP.number.isRequired,
-    content: RP.string.isRequired,
-    setContent: RP.func.isRequired,
-  }
-
-  componentDidMount() {
-    React.findDOMNode(this.refs.text).focus();
-  }
-
-  render() {
-    const {id, content, setContent} = this.props;
-
-    return (
-      <textarea ref="text"
-       value={content}
-       onChange={ev => setContent(id, ev.target.value)} />
-    );
-  }
-}
-
 const TypeToComponent = {
   Text: [ViewText, EditText]
 }
 
+class Trip {
+  static makeDefault() {
+    return {
+      title: "My Adventure",
+      items: [Text.makeDefault()]
+    };
+  }
+}
+
 export default class CreateTrip extends Component {
   state = {
-    trip: {
-      title: "Hello",
-      items: [makeText(), makeText()]
-    },
+    trip: localStorage.draftTrip && JSON.parse(localStorage.draftTrip) || Trip.makeDefault(),
     editedId: null
+  }
+
+  saveTrip(state) {
+    this.setState(state, () => {
+      localStorage.setItem("draftTrip", JSON.stringify(this.state.trip));
+    });
   }
 
   renderItem(item) {
     const {editedId} = this.state;
 
+    //days are containers of other items
+    if (item.type === Day.type) {
+      return <div key={item.id}>
+          <p>{item.date}</p>
+          {item.items.map(i => this.renderItem(i))}
+        </div>
+    }
+
+    //for each component, render the edit version if it's the currently edited one
     const ComponentClass = TypeToComponent[item.type][item.id === editedId ? 1 : 0];
 
     return (
@@ -93,10 +63,13 @@ export default class CreateTrip extends Component {
   render() {
     const {trip} = this.state;
 
-    return <div>
-      <h1>{trip.title}</h1>
-      {trip.items.map(item => this.renderItem(item))}
+    return (
+      <div>
+        <h1>{trip.title}</h1>
+        {trip.items.map(item => this.renderItem(item))}
+        <AddDay addDay={this.addDay} />
      </div>;
+    );
   }
 
   setEditedId = (id) => {
@@ -113,9 +86,22 @@ export default class CreateTrip extends Component {
           ...item,
           content: item.id === id ? content : item.content
         }))
-      }
+      }, ...state
     };
-    console.log(state);
-    this.setState(state);
+
+    this.saveTrip(state);
+  }
+
+  addDay = () => {
+    const {trip} = this.state;
+
+    const state = {
+      trip: {
+        ...trip,
+        items: [...trip.items, Day.makeDefault()]
+      }, ...state
+    };
+
+    this.saveTrip(state);
   }
 }
