@@ -6,10 +6,15 @@ import {Day, AddDay} from "./Day.js"
 import "../css/main.scss";
 
 /**
- * Trip: (Title, [Text | Day])
- * Day: [Location | Route]
- * Location: ( TBD )
- * Route: ( TBD, (Location, Location))
+ * Trip: {title, numDays, [Item]}
+ * Item: (Day | Text)
+ * Day: {Date, [(Location | Route)]}
+ * Date: {string} => auto-populates with numDays. in edit mode also has calendar for date-picking if want
+ * Text: {content}
+ * Location: (General) => eventually will be other types of Locations - restaurant, nature, museum, shopping, etc
+ * General: {geolocation, imageUrl, price, timeSpent, description}
+ * Route: {(Other), [locationId, locationId]} => eventually will be walking, biking, plane, train, ferry, bus, etc
+ * Other: {price, timeSpent}
  */
 
 const TypeToComponent = {

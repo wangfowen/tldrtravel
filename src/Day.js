@@ -5,7 +5,7 @@ import {Text} from "./Text.js"
 
 export class Day {
   static type = "Day"
-  static makeDefault = function() {
+  static makeDefault() {
     return {
       type: this.type,
       id: getId(),
