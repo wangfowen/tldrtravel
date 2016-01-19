@@ -1,4 +1,10 @@
 #!/bin/sh
+set -ex
+
+die() {
+  echo "FATAL ERROR: $@"
+  exit 1
+}
 
 # Ensure the repository isn't dirty
 [ `git status -u -s | wc -c` -eq 0 ] \
