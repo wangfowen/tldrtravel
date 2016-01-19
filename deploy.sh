@@ -13,9 +13,9 @@ die() {
 npm run build
 cp dist/bundle.js index.html /tmp/
 git checkout gh-pages
-rm -rf dist/* index.html
-mkdir -p dist
-cp /tmp/bundle.js dist
+rm -rf static/* index.html
+mkdir -p static
+cp /tmp/bundle.js static
 cp /tmp/index.html .
 git add dist index.html
 git commit -m "Automated yolo Deploy"
