@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import {markdown} from 'markdown';
 
+import "../css/main.scss";
+
 const RP = React.PropTypes;
 
 /**
