@@ -68,7 +68,7 @@ export default class CreateTrip extends Component {
         <h1>{trip.title}</h1>
         {trip.items.map(item => this.renderItem(item))}
         <AddDay addDay={this.addDay} />
-     </div>;
+     </div>
     );
   }
 
