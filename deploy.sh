@@ -17,6 +17,6 @@ rm -rf dist/* index.html
 mkdir -p dist
 cp /tmp/bundle.js dist
 cp /tmp/index.html .
-git commit -A -m "Deploy"
+git commit -a -m "Deploy"
 git push
 git checkout -
