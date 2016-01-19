@@ -17,7 +17,7 @@ rm -rf static/* index.html
 mkdir -p static
 cp /tmp/bundle.js static
 cp /tmp/index.html .
-git add dist index.html
+git add static index.html
 git commit -m "Automated yolo Deploy"
 git push
 git checkout -
