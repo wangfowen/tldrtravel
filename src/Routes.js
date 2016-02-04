@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Route } from 'react-router';
 
-import CreateTrip from "./CreateTrip";
+import CreateTrip from "./components/CreateTrip";
 
 class App extends Component {
   render() {

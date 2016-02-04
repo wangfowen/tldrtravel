@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 
-import {RP, getId} from "./common.js"
+import {RP, getId} from "../common.js"
 import {Text, ViewText, EditText} from "./Text.js"
-import {Day, AddDay} from "./Day.js"
-import "../css/main.scss";
+import {Day, AddDay, ViewDay, EditDay} from "./Day.js"
+import {Event, ViewEvent, EditEvent} from "./Event.js"
+import "../../css/main.scss";
 
 /**
  * Trip: {title, numDays, [Item]}
@@ -18,13 +19,16 @@ import "../css/main.scss";
  */
 
 const TypeToComponent = {
-  Text: [ViewText, EditText]
+  Text: [ViewText, EditText],
+  Day: [ViewDay, EditDay],
+  Event: [ViewEvent, EditEvent]
 }
 
 class Trip {
   static makeDefault() {
     return {
       title: "My Adventure",
+      numDays: 0,
       items: [Text.makeDefault()]
     };
   }
@@ -42,25 +46,22 @@ export default class CreateTrip extends Component {
     });
   }
 
-  renderItem(item) {
+  renderItem = (item) => {
     const {editedId} = this.state;
-
-    //days are containers of other items
-    if (item.type === Day.type) {
-      return <div key={item.id}>
-          <p>{item.date}</p>
-          {item.items.map(i => this.renderItem(i))}
-        </div>
-    }
 
     //for each component, render the edit version if it's the currently edited one
     const ComponentClass = TypeToComponent[item.type][item.id === editedId ? 1 : 0];
 
+    //TODO: this is not scalable
     return (
       <ComponentClass
         key={item.id}
         setEditedId={this.setEditedId}
         setContent={this.setContent}
+        items={item.items}
+        dayNum={item.dayNum}
+        renderItem={this.renderItem}
+        addEvent={this.addEvent}
         {...item} />
     );
   }
@@ -84,14 +85,25 @@ export default class CreateTrip extends Component {
   setContent = (id, content) => {
     const {trip} = this.state;
 
+    const updatedItem = function(item) {
+      if (item.type === Text.type) {
+        return {
+          ...item,
+          content: item.id === id ? content : item.content
+        }
+      } else if (item.type === Day.type) {
+        return {
+          ...item,
+          items: item.items.map(i => updatedItem(i))
+        }
+      }
+    }
+
     const state = {
       trip: {
         ...trip,
-        items: trip.items.map(item => ({
-          ...item,
-          content: item.id === id ? content : item.content
-        }))
-      }, ...state
+        items: trip.items.map(item => updatedItem(item))
+      }
     };
 
     this.saveTrip(state);
@@ -99,12 +111,33 @@ export default class CreateTrip extends Component {
 
   addDay = () => {
     const {trip} = this.state;
+    const newNumDays = trip.numDays + 1;
 
     const state = {
       trip: {
         ...trip,
-        items: [...trip.items, Day.makeDefault()]
-      }, ...state
+        items: [...trip.items, Day.makeDefault(newNumDays)],
+        numDays: newNumDays
+      }
+    };
+
+    this.saveTrip(state);
+  }
+
+  addEvent = (dayNum) => {
+    const {trip} = this.state;
+
+    const state = {
+      trip: {
+        ...trip,
+        items: trip.items.map(i => {
+          if (i.dayNum === dayNum) {
+            var newItem = i;
+            newItem.items = [...i.items, Event.makeDefault()];
+            return newItem;
+          } else { return i }
+        })
+      }
     };
 
     this.saveTrip(state);

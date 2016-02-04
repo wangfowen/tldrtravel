@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {markdown} from 'markdown';
 
-import {RP, getId} from "./common.js"
+import {RP, getId} from "../common.js"
 
 export class Text {
   static type = "Text"
