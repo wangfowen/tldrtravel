@@ -5,9 +5,9 @@ import {Text} from "./Text.js"
 
 export class Day {
   static type = "Day"
-  static makeDefault(numDays) {
+  static makeDefault = (numDays) => {
     return {
-      type: this.type,
+      type: Day.type,
       id: getId(),
       dayNum: numDays,
       items: [Text.makeDefault()]
@@ -24,7 +24,7 @@ export class ViewDay extends Component {
     addEvent: RP.func.isRequired,
   }
 
-  render() {
+  render = () => {
     const {items, dayNum, renderItem, addEvent} = this.props;
 
     //TODO: how get this button without having to have it on the view?
@@ -48,7 +48,7 @@ export class EditDay extends Component {
     addEvent: RP.func.isRequired,
   }
 
-  render() {
+  render = () => {
     const {items, dayNum, renderItem, addEvent} = this.props;
 
     return (
@@ -67,7 +67,7 @@ export class AddDay extends Component {
     addDay: RP.func.isRequired
   }
 
-  render() {
+  render = () => {
     const {addDay} = this.props;
 
     return (

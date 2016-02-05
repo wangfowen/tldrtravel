@@ -4,9 +4,9 @@ import {RP, getId} from "../common.js"
 
 export class Event {
   static type = "Event"
-  static makeDefault() {
+  static makeDefault = () => {
     return {
-      type: this.type,
+      type: Event.type,
       id: getId(),
     }
   }
@@ -18,7 +18,7 @@ export class ViewEvent extends Component {
     id: RP.number.isRequired,
   }
 
-  render() {
+  render = () => {
 
     return (
       <div>This is an Event</div>
@@ -32,7 +32,7 @@ export class EditEvent extends Component {
     id: RP.number.isRequired,
   }
 
-  render() {
+  render = () => {
 
     return (
       <div>This is an Event</div>

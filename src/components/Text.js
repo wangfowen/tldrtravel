@@ -5,9 +5,9 @@ import {RP, getId} from "../common.js"
 
 export class Text {
   static type = "Text"
-  static makeDefault() {
+  static makeDefault = () => {
     return {
-      type: this.type,
+      type: Text.type,
       id: getId(),
       content: "Add text here (optional)"
     }
@@ -21,7 +21,7 @@ export class ViewText extends Component {
     setEditedId: RP.func.isRequired,
   };
 
-  render() {
+  render = () => {
     const {id, content, setEditedId} = this.props;
 
     return (
@@ -39,11 +39,11 @@ export class EditText extends Component {
     setEditedId: RP.func.isRequired,
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     React.findDOMNode(this.refs.text).focus();
   }
 
-  render() {
+  render = () => {
     const {id, content, setContent, setEditedId} = this.props;
 
     return (

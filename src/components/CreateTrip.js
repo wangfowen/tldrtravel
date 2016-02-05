@@ -25,7 +25,7 @@ const TypeToComponent = {
 }
 
 class Trip {
-  static makeDefault() {
+  static makeDefault =() => {
     return {
       title: "My Adventure",
       numDays: 0,
@@ -40,17 +40,15 @@ export default class CreateTrip extends Component {
     editedId: null
   }
 
-  saveTrip(state) {
+  saveTrip = (state) => {
     this.setState(state, () => {
       localStorage.setItem("draftTrip", JSON.stringify(this.state.trip));
     });
   }
 
   renderItem = (item) => {
-    const {editedId} = this.state;
-
     //for each component, render the edit version if it's the currently edited one
-    const ComponentClass = TypeToComponent[item.type][item.id === editedId ? 1 : 0];
+    const ComponentClass = TypeToComponent[item.type][item.id === this.state.editedId ? 1 : 0];
 
     //TODO: this is not scalable
     return (
@@ -66,7 +64,7 @@ export default class CreateTrip extends Component {
     );
   }
 
-  render() {
+  render = () => {
     const {trip} = this.state;
 
     return (
@@ -85,17 +83,19 @@ export default class CreateTrip extends Component {
   setContent = (id, content) => {
     const {trip} = this.state;
 
-    const updatedItem = function(item) {
+    const updatedItem = (item) => {
       if (item.type === Text.type) {
         return {
           ...item,
           content: item.id === id ? content : item.content
-        }
+        };
       } else if (item.type === Day.type) {
         return {
           ...item,
           items: item.items.map(i => updatedItem(i))
-        }
+        };
+      } else {
+        return item;
       }
     }
 
