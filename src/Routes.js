@@ -2,12 +2,18 @@ import React, {Component} from 'react';
 import { Route } from 'react-router';
 
 import CreateTrip from "./components/CreateTrip";
+import Trips from "./components/Trips";
 
 class App extends Component {
   render() {
     const {children} = this.props;
 
-    return <div>{children}</div>;
+    //TODO: add menu to this when make one
+    return (
+      <div>
+        {children || <Trips />}
+      </div>
+    );
   }
 }
 
