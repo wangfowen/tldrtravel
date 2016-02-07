@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { getId, Mode, AType, IType } from '../../common'
+import { getId, Mode, IType } from '../../common'
 import { addActivity } from '../../actions'
 import Text from './Text'
 import Activity from './Activity'
@@ -18,10 +18,7 @@ class Day extends Component {
     const itemNodes = items.map(item => {
       switch (item.type) {
         case IType.Activity:
-          switch (item.category) {
-            default:
-              return (<Activity key={ getId() } />)
-          }
+          return (<Activity key={ getId() } { ...item } />)
         default:
           return null
       }
@@ -29,6 +26,7 @@ class Day extends Component {
 
     //TODO: allow custom date instead of just day num - with date picker
     //TODO: generate add route buttons between activities
+    //TODO: extract this into a component?
     return (
       <div>
         <p>Day {dayNum}</p>

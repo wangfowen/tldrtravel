@@ -5,6 +5,10 @@ export const getId = () => {
   return Math.random().toString()
 };
 
+export const nodeMode = (tripMode, editId, itemId) => {
+    return (tripMode === Mode.Edit && editId === itemId) ? Mode.Edit : Mode.View
+  }
+
 export const Mode = {
   Edit: "EDIT",
   View: "VIEW"
@@ -25,5 +29,15 @@ export const IType = {
 
 //type of activity
 export const AType = {
+  Other: "OTHER"
+}
+
+//type of route
+export const RType = {
+  Foot: "FOOT",
+  Bike: "BIKE",
+  Plane: "PLANE",
+  Train: "TRAIN",
+  Bus: "BUS",
   Other: "OTHER"
 }

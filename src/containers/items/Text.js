@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Mode, getId } from '../../common'
+import { Mode, getId, nodeMode } from '../../common'
 import { editText, setEditId } from '../../actions'
 import ViewText from '../../components/items/view/ViewText'
 import EditText from '../../components/items/edit/EditText'
@@ -13,16 +13,10 @@ class Text extends Component {
     itemId: getId()
   }
 
-  determineMode() {
-    const { tripMode, editId, itemId } = this.props
-
-    return (tripMode === Mode.Edit && editId === itemId) ? Mode.Edit : Mode.View
-  }
-
   render() {
     const { tripMode, onViewClick, onEditChange, onEditBlur, content, itemId } = this.props
 
-    if (this.determineMode() === Mode.Edit) {
+    if (nodeMode() === Mode.Edit) {
       return (
         <EditText
           onChange={(text) => onEditChange(itemId, text)}
