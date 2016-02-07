@@ -1,6 +1,6 @@
 import React from 'react'
 import EditableHeader from '../containers/EditableHeader'
-import Itinerary from './Itinerary'
+import Itinerary from '../containers/Itinerary'
 import "../../css/main.scss";
 
 const Trip = () => (

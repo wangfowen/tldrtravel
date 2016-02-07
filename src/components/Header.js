@@ -7,7 +7,7 @@ const Header = ({title, author, description}) => {
 
   //TODO: am I supposed to key here or inside?
   return (
-    <div>
+    <div className="header">
       <Text content={ title } itemId={ titleId } />
       <p>{ author }</p>
       <Text content={ description } itemId={ descId } />

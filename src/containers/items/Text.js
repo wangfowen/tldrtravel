@@ -8,6 +8,7 @@ import EditText from '../../components/items/edit/EditText'
 
 class Text extends Component {
   //if an itemId isn't passed to it, auto-assign one
+  //TODO: why does this alway return the same thing?
   static defaultProps = {
     itemId: getId()
   }
@@ -65,15 +66,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onViewClick: (id) => {
-      dispatch(setEditId(id))
-    },
-    onEditChange: (id, text) => {
-      dispatch(editText(id, text))
-    },
-    onEditBlur: () => {
-      dispatch(setEditId(null))
-    }
+    onViewClick: (id) => { dispatch(setEditId(id)) },
+    onEditChange: (id, text) => { dispatch(editText(id, text)) },
+    onEditBlur: () => { dispatch(setEditId(null)) }
   }
 }
 

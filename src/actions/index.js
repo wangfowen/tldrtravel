@@ -21,3 +21,11 @@ export const setEditId = (id) => {
     id
   }
 }
+
+export const addDay = () => {
+  return { type: Action.AddDay }
+}
+
+export const addEvent = () => {
+  return { type: Action.AddEvent }
+}

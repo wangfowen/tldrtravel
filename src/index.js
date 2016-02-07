@@ -10,7 +10,12 @@ import Routes from './Routes';
 import trip from './reducers';
 
 const history = createHashHistory();
-let store = createStore(trip);
+
+let store = localStorage.draftTrip ? createStore(trip, JSON.parse(localStorage.draftTrip)) : createStore(trip);
+
+store.subscribe(() =>
+  localStorage.setItem("draftTrip", JSON.stringify(store.getState()))
+)
 
 render(
   <Provider store={store}>

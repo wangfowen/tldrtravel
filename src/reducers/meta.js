@@ -1,13 +1,11 @@
 import { Mode, Action } from '../common'
 
 /*
-  {
-    title: title of trip,
-    author: author of trip,
-    tripMode: Edit or View trip,
-    description: description of the trip
-    editId: current node being edited
-  }
+  title: title of trip,
+  author: author of trip,
+  tripMode: Edit or View trip,
+  description: description of the trip
+  editId: current node being edited
 */
 
 const meta = (state = {
