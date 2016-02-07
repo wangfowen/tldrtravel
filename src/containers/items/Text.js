@@ -33,7 +33,7 @@ class Text extends Component {
       )
     //in view mode don't display anything if there's no content set
     } else if (tripMode === Mode.View && content === undefined) {
-      return ""
+      return null
     } else {
       return (
         <ViewText

@@ -1,27 +1,40 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Mode } from '../../common'
-import { addEvent } from '../../actions'
+import { getId, Mode, AType, IType } from '../../common'
+import { addActivity } from '../../actions'
 import Text from './Text'
+import Activity from './Activity'
 
 class Day extends Component {
   render() {
-    const { id, tripMode, dayNum, items, addEvent, description } = this.props
+    const { id, tripMode, dayNum, items, addActivity, description } = this.props
 
-    let addEventButton = ""
+    let addActivityButton = ""
     if (tripMode === Mode.Edit) {
-      addEventButton = <button onClick={addEvent}>Add Event</button>
+      addActivityButton = <button onClick={addActivity}>Add Activity</button>
     }
 
-    const itemNodes = items.map(item => <p>Item</p>)
+    const itemNodes = items.map(item => {
+      switch (item.type) {
+        case IType.Activity:
+          switch (item.category) {
+            default:
+              return (<Activity key={ getId() } />)
+          }
+        default:
+          return null
+      }
+    })
 
+    //TODO: allow custom date instead of just day num - with date picker
+    //TODO: generate add route buttons between activities
     return (
       <div>
         <p>Day {dayNum}</p>
         <Text content={ description } itemId={ id } />
         { itemNodes }
-        { addEventButton }
+        { addActivityButton }
       </div>
     )
   }
@@ -31,7 +44,7 @@ Day.propTypes = {
   id: PropTypes.string.isRequired,
   items: PropTypes.array.isRequired,
   dayNum: PropTypes.number.isRequired,
-  addEvent: PropTypes.func.isRequired,
+  addActivity: PropTypes.func.isRequired,
   tripMode: PropTypes.string.isRequired,
   description: PropTypes.string
 }
@@ -44,7 +57,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addEvent: () => { dispatch(addEvent()) }
+    addActivity: () => { dispatch(addActivity()) }
   }
 }
 

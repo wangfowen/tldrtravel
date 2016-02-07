@@ -15,5 +15,15 @@ export const Action = {
   SetMode: "SET_MODE",
   SetEditId: "SET_EDIT_ID",
   AddDay: "ADD_DAY",
-  AddEvent: "ADD_EVENT"
+  AddActivity: "ADD_ACTIVITY"
+}
+
+//type of item
+export const IType = {
+  Activity: "ACTIVITY"
+}
+
+//type of activity
+export const AType = {
+  Other: "OTHER"
 }

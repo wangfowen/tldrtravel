@@ -1,9 +1,10 @@
-import { Action } from '../common'
+import { Action, AType, IType } from '../common'
 
 /*
- type: type of item
+ type: type of item - Route or Activity
+ category: category within that type
 */
-const items = (state, action) => {
+const item = (state, action) => {
   switch (action.type) {
     default:
       return state
@@ -28,24 +29,17 @@ const day = (state, action) => {
           items: state.items.map(i => item(i, action))
         }
       }
-    default:
-      return state
-  }
-
-}
-
-const days = (state, action) => {
-  switch (action.type) {
-    case Action.AddDay:
-      return [...state, {
-          id: "day-" + state.length + 1,
-          dayNum: state.length + 1,
-          items: []
+    case Action.AddActivity:
+      return {...state,
+        items: [...state.items, {
+          type: IType.Activity,
+          category: AType.Other
         }]
-    case Action.EditText:
-      return state.map(d => day(d, action))
+      }
     default:
-      return state
+      return {...state,
+        items: state.items.map(i => item(i, action))
+      }
   }
 }
 
@@ -57,9 +51,17 @@ const itinerary = (state = {
 }, action) => {
 
   switch (action.type) {
+    case Action.AddDay:
+      return {...state,
+        days: [...state.days, {
+          id: "day-" + state.days.length + 1,
+          dayNum: state.days.length + 1,
+          items: []
+        }]
+      }
     default:
       return {...state,
-        days: days(state.days, action)
+        days: state.days.map(d => day(d, action))
       }
   }
 }

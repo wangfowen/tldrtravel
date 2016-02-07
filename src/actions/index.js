@@ -26,6 +26,6 @@ export const addDay = () => {
   return { type: Action.AddDay }
 }
 
-export const addEvent = () => {
-  return { type: Action.AddEvent }
+export const addActivity = () => {
+  return { type: Action.AddActivity }
 }
