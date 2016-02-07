@@ -23,6 +23,18 @@ export const addDay = () => {
   return { type: Action.AddDay }
 }
 
-export const addActivity = () => {
-  return { type: Action.AddActivity }
+export const addActivity = (dayId) => {
+  return {
+    type: Action.AddActivity,
+    dayId
+  }
+}
+
+export const addRoute = (dayId, fromId, toId) => {
+  return {
+    type: Action.AddRoute,
+    dayId,
+    fromId,
+    toId
+  }
 }

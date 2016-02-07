@@ -9,14 +9,6 @@ class Itinerary extends Component {
   render() {
     const { days, tripMode, addDay } = this.props
 
-    const dayNodes = days.map(day =>
-      <Day
-        key={ day.dayNum }
-        id={ "day-" + day.dayNum }
-        { ...day }
-      />
-    )
-
     let addDayButton = ""
     if (tripMode === Mode.Edit) {
       addDayButton = <button onClick={addDay}>Add Day</button>
@@ -24,7 +16,7 @@ class Itinerary extends Component {
 
     return (
       <div>
-        { dayNodes }
+        { days.map(day => <Day key={ day.dayNum } { ...day } />) }
         { addDayButton }
       </div>
     )

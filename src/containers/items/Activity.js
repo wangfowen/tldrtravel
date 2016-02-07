@@ -21,8 +21,7 @@ export default class Activity extends Component {
         case AType.Other:
           //TODO: does this need key?
           activity = (
-            <EditActivity
-            />
+            <EditActivity {...this.props} />
           )
           break;
         default:
@@ -32,7 +31,7 @@ export default class Activity extends Component {
       switch(category) {
         case AType.Other:
           activity = (
-            <ViewActivity
+            <ViewActivity {...this.props}
               onClick={() => onViewClick(id)}
             />
           )

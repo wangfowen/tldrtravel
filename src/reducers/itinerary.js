@@ -3,6 +3,7 @@ import { Action, AType, IType, getId } from '../common'
 /*
  type: type of item - Route or Activity
  category: category within that type
+ id: identifier for the item
 */
 const item = (state, action) => {
   switch (action.type) {
@@ -37,6 +38,15 @@ const day = (state, action) => {
           category: AType.Other
         }]
       }
+    case Action.AddRoute:
+      //TODO: this has to go in the right spot
+      return {...state,
+        items: [...state.items, {
+          id: getId(),
+          type: IType.Route,
+          category: AType.Other
+        }]
+      }
     default:
       return {...state,
         items: state.items.map(i => item(i, action))
@@ -55,10 +65,22 @@ const itinerary = (state = {
     case Action.AddDay:
       return {...state,
         days: [...state.days, {
-          id: "day-" + state.days.length + 1,
+          id: "day-" + (state.days.length + 1),
           dayNum: state.days.length + 1,
           items: []
         }]
+      }
+    case Action.AddActivity:
+      return {...state,
+        days: state.days.map(d => {
+          return action.dayId === d.id ? day(d, action) : d
+        })
+      }
+    case Action.AddRoute:
+      return {...state,
+        days: state.days.map(d => {
+          return action.dayId === d.id ? day(d, action) : d
+        })
       }
     default:
       return {...state,

@@ -1,40 +1,24 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Mode, IType } from '../../common'
-import { addActivity } from '../../actions'
-import Text from './Text'
-import Activity from './Activity'
+import { Mode } from '../../common'
+import { addActivity, addRoute } from '../../actions'
+import EditDay from '../../components/items/edit/EditDay'
+import ViewDay from '../../components/items/view/ViewDay'
 
 class Day extends Component {
   render() {
-    const { id, tripMode, dayNum, items, addActivity, description } = this.props
+    const { tripMode } = this.props
 
-    let addActivityButton = ""
     if (tripMode === Mode.Edit) {
-      addActivityButton = <button onClick={addActivity}>Add Activity</button>
+      return (
+        <EditDay {...this.props} />
+      )
+    } else {
+      return (
+        <ViewDay {...this.props} />
+      )
     }
-
-    const itemNodes = items.map(item => {
-      switch (item.type) {
-        case IType.Activity:
-          return (<Activity key={ item.id } { ...item } />)
-        default:
-          return null
-      }
-    })
-
-    //TODO: allow custom date instead of just day num - with date picker
-    //TODO: generate add route buttons between activities
-    //TODO: extract this into a component?
-    return (
-      <div>
-        <p>Day {dayNum}</p>
-        <Text content={ description } id={ id } />
-        { itemNodes }
-        { addActivityButton }
-      </div>
-    )
   }
 }
 
@@ -43,6 +27,7 @@ Day.propTypes = {
   items: PropTypes.array.isRequired,
   dayNum: PropTypes.number.isRequired,
   addActivity: PropTypes.func.isRequired,
+  addRoute: PropTypes.func.isRequired,
   tripMode: PropTypes.string.isRequired,
   description: PropTypes.string
 }
@@ -55,7 +40,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    addActivity: () => { dispatch(addActivity()) }
+    addActivity: (dayId) => { dispatch(addActivity(dayId)) },
+    addRoute: (dayId, fromId, toId) => { dispatch(addRoute(dayId, fromId, toId)) }
   }
 }
 
