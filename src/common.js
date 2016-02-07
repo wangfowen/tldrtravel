@@ -16,7 +16,7 @@ export const Mode = {
 
 export const Action = {
   EditText: "EDIT_TEXT",
-  SetMode: "SET_MODE",
+  ToggleMode: "TOGGLE_MODE",
   SetEditId: "SET_EDIT_ID",
   AddDay: "ADD_DAY",
   AddActivity: "ADD_ACTIVITY"

@@ -29,6 +29,12 @@ const meta = (state = {
       return {...state,
         editId: action.id
       }
+    case Action.ToggleMode:
+      const newTripMode = state.tripMode === Mode.Edit ? Mode.View : Mode.Edit
+
+      return {...state,
+        tripMode: newTripMode
+      }
     default:
       return state
   }

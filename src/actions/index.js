@@ -8,11 +8,8 @@ export const editText = (id, text) => {
   }
 }
 
-export const setMode = (mode) => {
-  return {
-    type: Action.SetMode,
-    mode
-  }
+export const toggleMode = () => {
+  return { type: Action.ToggleMode }
 }
 
 export const setEditId = (id) => {

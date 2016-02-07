@@ -2,7 +2,7 @@ import 'babel-polyfill'
 import React, { Component } from 'react'
 import { Route } from 'react-router'
 
-import Trip from "./components/Trip"
+import CreateTrip from "./containers/CreateTrip"
 import Trips from "./components/Trips"
 
 export default class App extends Component {
@@ -18,10 +18,8 @@ export default class App extends Component {
   }
 }
 
-
-//TODO: when add other pages, will need to change Trip to CreateTrip
 export default <Route>
   <Route path="/" component={App}>
-    <Route path="create" component={Trip} />
+    <Route path="create" component={CreateTrip} />
   </Route>
 </Route>;
