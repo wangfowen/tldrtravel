@@ -1,3 +1,4 @@
+/*
 import React, {Component} from 'react';
 
 import {RP, getId} from "../common.js"
@@ -76,3 +77,4 @@ export class AddDay extends Component {
     );
   }
 }
+*/

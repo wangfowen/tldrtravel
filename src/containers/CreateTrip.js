@@ -1,10 +1,12 @@
+/*
 import React, {Component} from 'react';
 
-import {RP, getId} from "../common.js"
+import {getId} from "../common.js"
 import {Text, ViewText, EditText} from "./Text.js"
 import {Day, AddDay, ViewDay, EditDay} from "./Day.js"
 import {Event, ViewEvent, EditEvent} from "./Event.js"
 import "../../css/main.scss";
+*/
 
 /**
  * Trip: {title, numDays, [Item]}
@@ -18,6 +20,7 @@ import "../../css/main.scss";
  * Other: {price, timeSpent}
  */
 
+/*
 const TypeToComponent = {
   Text: [ViewText, EditText],
   Day: [ViewDay, EditDay],
@@ -143,3 +146,4 @@ export default class CreateTrip extends Component {
     this.saveTrip(state);
   }
 }
+*/

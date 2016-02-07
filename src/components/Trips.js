@@ -6,6 +6,6 @@ export default class Trips extends Component {
       <div>
         <a href="#/create">Create a trip</a>
       </div>
-    );
+    )
   }
 }

@@ -1,8 +1,17 @@
-import React from 'react';
+let nextItemId = 0
 
-export const RP = React.PropTypes;
-
-//TODO: make this more legit ids
+//TODO: make this work properly
 export const getId = () => {
-  return Math.random();
+  return Math.random()
 };
+
+export const Mode = {
+  Edit: "EDIT",
+  View: "VIEW"
+}
+
+export const Action = {
+  EditText: "EDIT_TEXT",
+  SetMode: "SET_MODE",
+  SetEditId: "SET_EDIT_ID"
+}

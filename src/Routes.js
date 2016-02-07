@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
-import { Route } from 'react-router';
+import 'babel-polyfill'
+import React, { Component } from 'react'
+import { Route } from 'react-router'
 
-import CreateTrip from "./components/CreateTrip";
-import Trips from "./components/Trips";
+import Trip from "./components/Trip"
+import Trips from "./components/Trips"
 
-class App extends Component {
+export default class App extends Component {
   render() {
     const {children} = this.props;
 
@@ -13,12 +14,14 @@ class App extends Component {
       <div>
         {children || <Trips />}
       </div>
-    );
+    )
   }
 }
 
+
+//TODO: when add other pages, will need to change Trip to CreateTrip
 export default <Route>
   <Route path="/" component={App}>
-    <Route path="create" component={CreateTrip} />
+    <Route path="create" component={Trip} />
   </Route>
 </Route>;

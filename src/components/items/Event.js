@@ -1,3 +1,4 @@
+/*
 import React, {Component} from 'react';
 
 import {RP, getId} from "../common.js"
@@ -40,3 +41,4 @@ export class EditEvent extends Component {
   }
 }
 
+*/
