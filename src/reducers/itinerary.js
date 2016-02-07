@@ -1,4 +1,4 @@
-import { Action, AType, IType } from '../common'
+import { Action, AType, IType, getId } from '../common'
 
 /*
  type: type of item - Route or Activity
@@ -32,6 +32,7 @@ const day = (state, action) => {
     case Action.AddActivity:
       return {...state,
         items: [...state.items, {
+          id: getId(),
           type: IType.Activity,
           category: AType.Other
         }]

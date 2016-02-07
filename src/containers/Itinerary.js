@@ -11,7 +11,8 @@ class Itinerary extends Component {
 
     const dayNodes = days.map(day =>
       <Day
-        key={ day.id }
+        key={ day.dayNum }
+        id={ "day-" + day.dayNum }
         { ...day }
       />
     )

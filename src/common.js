@@ -1,11 +1,11 @@
 let nextItemId = 0
 
-//TODO: make this work properly
+//TODO: make this work properly such that it assigns incremental ids
 export const getId = () => {
   return Math.random().toString()
 };
 
-export const nodeMode = (tripMode, editId, itemId) => {
+export const itemMode = (tripMode, editId, itemId) => {
     return (tripMode === Mode.Edit && editId === itemId) ? Mode.Edit : Mode.View
   }
 

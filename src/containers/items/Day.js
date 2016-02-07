@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { getId, Mode, IType } from '../../common'
+import { Mode, IType } from '../../common'
 import { addActivity } from '../../actions'
 import Text from './Text'
 import Activity from './Activity'
@@ -18,7 +18,7 @@ class Day extends Component {
     const itemNodes = items.map(item => {
       switch (item.type) {
         case IType.Activity:
-          return (<Activity key={ getId() } { ...item } />)
+          return (<Activity key={ item.id } { ...item } />)
         default:
           return null
       }
@@ -30,7 +30,7 @@ class Day extends Component {
     return (
       <div>
         <p>Day {dayNum}</p>
-        <Text content={ description } itemId={ id } />
+        <Text content={ description } id={ id } />
         { itemNodes }
         { addActivityButton }
       </div>

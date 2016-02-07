@@ -1,7 +1,10 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { getId, nodeMode, AType, Mode } from '../../common'
+import { setEditId } from '../../actions'
+import { getId, itemMode, AType, Mode } from '../../common'
+import EditActivity from '../../components/items/edit/EditActivity'
+import ViewActivity from '../../components/items/view/ViewActivity'
 
 /*
  * Location: (General) => eventually will be other types of Locations - restaurant, nature, museum, shopping, etc
@@ -9,18 +12,18 @@ import { getId, nodeMode, AType, Mode } from '../../common'
  */
 
 export default class Activity extends Component {
-  static defaultProps = {
-    itemId: getId()
-  }
-
   render() {
-    const { category } = this.props
+    const { category, id, onViewClick, editId, tripMode } = this.props
 
     let activity
-    if (nodeMode() === Mode.Edit) {
+    if (itemMode(tripMode, editId, id) === Mode.Edit) {
       switch(category) {
         case AType.Other:
-          activity = (<div>Activity</div>)
+          //TODO: does this need key?
+          activity = (
+            <EditActivity
+            />
+          )
           break;
         default:
           activity = null
@@ -28,7 +31,11 @@ export default class Activity extends Component {
     } else {
       switch(category) {
         case AType.Other:
-          activity = (<div>Activity</div>)
+          activity = (
+            <ViewActivity
+              onClick={() => onViewClick(id)}
+            />
+          )
           break;
         default:
           activity = null
@@ -40,9 +47,11 @@ export default class Activity extends Component {
 }
 
 Activity.propTypes = {
-  itemId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   tripMode: PropTypes.string.isRequired,
   category: PropTypes.string.isRequired,
+  onViewClick: PropTypes.func.isRequired,
+  editId: PropTypes.string,
   name: PropTypes.string,
   geolocation: PropTypes.string,
   imageUrl: PropTypes.string,
@@ -53,12 +62,14 @@ Activity.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    tripMode: state.meta.tripMode
+    tripMode: state.meta.tripMode,
+    editId: state.meta.editId
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onViewClick: (id) => { dispatch(setEditId(id)) }
   }
 }
 

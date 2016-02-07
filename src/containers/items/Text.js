@@ -1,27 +1,22 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Mode, getId, nodeMode } from '../../common'
+import { Mode, getId, itemMode } from '../../common'
 import { editText, setEditId } from '../../actions'
 import ViewText from '../../components/items/view/ViewText'
 import EditText from '../../components/items/edit/EditText'
 
+//text inherits its id from its parent
 class Text extends Component {
-  //if an itemId isn't passed to it, auto-assign one
-  //TODO: why does this alway return the same thing?
-  static defaultProps = {
-    itemId: getId()
-  }
-
   render() {
-    const { tripMode, onViewClick, onEditChange, onEditBlur, content, itemId } = this.props
+    const { tripMode, onViewClick, onEditChange, onEditBlur, content, id, editId } = this.props
 
-    if (nodeMode() === Mode.Edit) {
+    if (itemMode(tripMode, editId, id) === Mode.Edit) {
       return (
         <EditText
-          onChange={(text) => onEditChange(itemId, text)}
+          onChange={(text) => onEditChange(id, text)}
           onBlur={() => onEditBlur()}
-          key={ itemId }
+          key={ id }
           content={ content }
         />
       )
@@ -31,9 +26,9 @@ class Text extends Component {
     } else {
       return (
         <ViewText
-          id={ itemId }
-          onClick={() => onViewClick(itemId)}
-          key={ itemId }
+          id={ id }
+          onClick={() => onViewClick(id)}
+          key={ id }
           content={ content || "Add an optional description here"}
         />
       )
@@ -42,7 +37,7 @@ class Text extends Component {
 }
 
 Text.propTypes = {
-  itemId: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
   tripMode: PropTypes.string.isRequired,
   onViewClick: PropTypes.func.isRequired,
   onEditChange: PropTypes.func.isRequired,
