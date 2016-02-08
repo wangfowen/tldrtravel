@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 import EditableHeader from '../containers/EditableHeader'
 import Itinerary from '../containers/Itinerary'
-import ToggleButton from './ToggleButton'
+import ToggleButton from './helpers/ToggleButton'
 import "../../css/main.scss";
 
 const Trip = ({ onClick, onChange, checked }) => (

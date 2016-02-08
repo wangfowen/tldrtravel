@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import Optional from '../../Optional'
+import Optional from '../../helpers/Optional'
 
 const ViewActivity = ({ onClick, name, geolocation, imageUrl, description, price, timeSpent }) => {
   return (

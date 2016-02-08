@@ -9,8 +9,10 @@ const item = (state, action) => {
   switch (action.type) {
     case Action.EditActivity:
       if (action.id === state.id) {
-        //TODO: change content here
-        return {...state
+        return {...action.content,
+          id: state.id,
+          type: state.type,
+          category: state.category
         }
       } else return state
     default:

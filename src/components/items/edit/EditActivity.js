@@ -1,24 +1,36 @@
 import React, { PropTypes, Component } from 'react'
 
 class EditActivity extends Component {
+  saveActivity = () => {
+    let content = {}
+    for (let ref in this.refs) {
+      if (this.refs[ref].value !== "") {
+        content[ref] = this.refs[ref].value
+      }
+    }
+
+    this.props.onSave(content)
+  }
+
   render() {
-    const { name, geolocation, imageUrl, description, price, timeSpent, onChange } = this.props
+    const { name, geolocation, imageUrl, description, price, timeSpent } = this.props
     //TODO: use onChange - how can easily capture changes here and convert to an object?
     return (
       <div>
-        <p>Activity: <input type="text" value={ name } /></p>
-        <p>Location: <input type="text" value={ geolocation } /></p>
-        <p>Image URL: <input type="text" value={ imageUrl } /></p>
-        <p>Description: <input type="text" value={ description } /></p>
-        <p>Price: <input type="text" value={ price } /></p>
-        <p>Time spent: <input type="text" value={ timeSpent } /></p>
+        <p>Activity: <input ref="name" type="text" defaultValue={ name } /></p>
+        <p>Location: <input ref="geolocation" type="text" defaultValue={ geolocation } /></p>
+        <p>Image URL: <input ref="imageUrl" type="text" defaultValue={ imageUrl } /></p>
+        <p>Description: <textarea ref="description" defaultValue={ description } /></p>
+        <p>Price: <input ref="price" type="text" defaultValue={ price } /></p>
+        <p>Time spent: <input ref="timeSpent" type="text" defaultValue={ timeSpent } /></p>
+        <button onClick={ this.saveActivity }>Save</button>
       </div>
     )
   }
 }
 
 EditActivity.propTypes = {
-  onChange: PropTypes.func,
+  onSave: PropTypes.func,
 
   name: PropTypes.string,
   geolocation: PropTypes.string,
