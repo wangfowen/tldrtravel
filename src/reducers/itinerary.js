@@ -22,7 +22,8 @@ const item = (state, action) => {
 
 /*
   id: identifier for the day
-  items: array of items in the day
+  activities: array of activities
+  routes: map of {fromId,toId}=>route
   dayNum: identifier for day number
   description: optional description of the day
 */

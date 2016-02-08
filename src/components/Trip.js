@@ -6,7 +6,7 @@ import ToggleButton from './helpers/ToggleButton'
 import "../../css/main.scss";
 
 const Trip = ({ onClick, onChange, checked }) => (
-  <div onClick={() => onClick() }>
+  <div className="trip" onClick={(ev) => onClick(ev) }>
     <EditableHeader />
     <Itinerary />
     <ToggleButton checked={ checked }

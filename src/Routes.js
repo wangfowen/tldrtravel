@@ -11,7 +11,7 @@ export default class App extends Component {
 
     //TODO: add menu to this when make one
     return (
-      <div>
+      <div className="app">
         {children || <Trips />}
       </div>
     )

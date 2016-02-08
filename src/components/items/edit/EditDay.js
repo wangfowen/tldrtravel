@@ -8,9 +8,26 @@ export default class EditDay extends Component {
     const { id, items, dayNum, description, addActivity, addRoute } = this.props
     const addActivityButton = <button onClick={() => addActivity(id)}>Add Activity</button>
 
+    /*
+     TODO: how to generate route buttons - first store routes separately from activities
+
+    // routes: {[key: itemId,itemId]: Route}
+    const toDisplay = [items[0]];
+    for (let i = 1; i < items.length; i++) {
+      const left = items[i-1];
+      const right = items[i];
+      const route = routes[`${left.id},${right.id}`];
+      if (route) {
+        toDisplay.push(<RouteCopnent ..route);
+      } else {
+        toDisplay.push(<AddRoute>);
+      }
+      toDisplay.push(right);
+    }
+    */
+
     return (
       //TODO: allow custom date instead of just day num - with date picker
-      //TODO: generate add route buttons between activities
       <div>
         <p>Day {dayNum}</p>
         <Text content={ description } id={ id } />

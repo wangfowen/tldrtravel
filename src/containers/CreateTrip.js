@@ -12,8 +12,11 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    //TODO: how default to this without overriding other dispatches
-    onClick: () => { /*dispatch(setEditId(null))*/ },
+    onClick: (ev) => {
+      if (ev.target === ev.currentTarget) {
+        dispatch(setEditId(null))
+      }
+    },
     onChange: () => { dispatch(toggleMode()) }
   }
 }

@@ -1,33 +1,14 @@
 import React, { PropTypes } from 'react'
 
-import Optional from '../../helpers/Optional'
-
 const ViewActivity = ({ onClick, name, geolocation, imageUrl, description, price, timeSpent }) => {
   return (
-    <div onClick={() => onClick()}>
-      <Optional condition={ name !== undefined }>
-        <p>{ name }</p>
-      </Optional>
-
-      <Optional condition={ geolocation !== undefined }>
-        <p>{ geolocation }</p>
-      </Optional>
-
-      <Optional condition={ imageUrl !== undefined }>
-        <img src={ imageUrl } />
-      </Optional>
-
-      <Optional condition={ description !== undefined }>
-        <p>{ description }</p>
-      </Optional>
-
-      <Optional condition={ price !== undefined }>
-        <p>Price: ${ price }</p>
-      </Optional>
-
-      <Optional condition={ timeSpent !== undefined }>
-        <p>Time spent: { timeSpent } hours</p>
-      </Optional>
+    <div onClick={onClick}>
+      {name && <p>{ name }</p>}
+      {geolocation && <p>{ geolocation }</p>}
+      {imageUrl && <img src={ imageUrl } />}
+      {description && <p>{ description }</p>}
+      {price && <p>Price: ${price}</p>}
+      {timeSpent && <p>Time spent: { timeSpent } hours</p>}
     </div>
   );
 }

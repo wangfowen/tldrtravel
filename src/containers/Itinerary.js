@@ -15,7 +15,7 @@ class Itinerary extends Component {
     }
 
     return (
-      <div>
+      <div className="itinerary">
         { days.map(day => <Day key={ day.dayNum } { ...day } />) }
         { addDayButton }
       </div>

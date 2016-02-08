@@ -12,11 +12,15 @@ class Day extends Component {
 
     if (tripMode === Mode.Edit) {
       return (
-        <EditDay {...this.props} />
+        <div className="day">
+          <EditDay {...this.props} />
+        </div>
       )
     } else {
       return (
-        <ViewDay {...this.props} />
+        <div className="day">
+          <ViewDay {...this.props} />
+        </div>
       )
     }
   }

@@ -5,7 +5,7 @@ import Route from './containers/items/Route'
 
 let nextItemId = 0
 
-//TODO: make this work properly such that it assigns incremental ids, starting from latest already existing
+//TODO: make this work properly such that it assigns incremental ids, starting from latest already existing - store in global state latest id
 export const getId = () => {
   return Math.random().toString()
 };

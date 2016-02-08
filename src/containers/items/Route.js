@@ -19,7 +19,6 @@ export default class Route extends Component {
     if (itemMode(tripMode, editId, id) === Mode.Edit) {
       switch(category) {
         case RType.Other:
-          //TODO: does this need key?
           route = (
             <EditRoute
             />

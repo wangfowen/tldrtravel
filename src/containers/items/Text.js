@@ -16,19 +16,17 @@ class Text extends Component {
         <EditText
           onChange={(text) => onEditChange(id, text)}
           onBlur={() => onEditBlur()}
-          key={ id }
           content={ content }
         />
       )
     //in view mode don't display anything if there's no content set
-    } else if (tripMode === Mode.View && content === undefined) {
+    } else if (tripMode === Mode.View && !content) {
       return null
     } else {
       return (
         <ViewText
           id={ id }
           onClick={() => onViewClick(id)}
-          key={ id }
           content={ content || "Add an optional description here"}
         />
       )

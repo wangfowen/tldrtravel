@@ -19,11 +19,12 @@ export default class Activity extends Component {
     if (itemMode(tripMode, editId, id) === Mode.Edit) {
       switch(category) {
         case AType.Other:
-          //TODO: does this need key?
           activity = (
-            <EditActivity {...this.props}
-              onSave={(content) => onEditSave(id, content)}
-            />
+            <div className="activity">
+              <EditActivity {...this.props}
+                onSave={(content) => onEditSave(id, content)}
+              />
+            </div>
           )
           break;
         default:
@@ -35,14 +36,16 @@ export default class Activity extends Component {
           const { name, description, price, timeSpent } = this.props
 
           activity = (
-            <ViewActivity
-              name = { name || "Sample activity" }
-              description = { description || "This is the story of what went down during my trip!" }
-              price = { price || 10 }
-              timeSpent = { timeSpent || 3 }
-              {...this.props}
-              onClick={() => onViewClick(id)}
-            />
+            <div className="activity">
+              <ViewActivity
+                name = { name || "Sample activity" }
+                description = { description || "This is the story of what went down during my trip!" }
+                price = { price || 10 }
+                timeSpent = { timeSpent || 3 }
+                {...this.props}
+                onClick={() => onViewClick(id)}
+              />
+            </div>
           )
           break;
         default:
