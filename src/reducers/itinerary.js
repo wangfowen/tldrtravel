@@ -7,6 +7,12 @@ import { Action, AType, IType, getId } from '../common'
 */
 const item = (state, action) => {
   switch (action.type) {
+    case Action.EditActivity:
+      if (action.id === state.id) {
+        //TODO: change content here
+        return {...state
+        }
+      } else return state
     default:
       return state
   }

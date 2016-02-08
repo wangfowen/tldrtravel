@@ -5,7 +5,7 @@ import Route from './containers/items/Route'
 
 let nextItemId = 0
 
-//TODO: make this work properly such that it assigns incremental ids
+//TODO: make this work properly such that it assigns incremental ids, starting from latest already existing
 export const getId = () => {
   return Math.random().toString()
 };
@@ -25,6 +25,7 @@ export const Action = {
   SetEditId: "SET_EDIT_ID",
   AddDay: "ADD_DAY",
   AddActivity: "ADD_ACTIVITY",
+  EditActivity: "EDIT_ACTIVITY",
   AddRoute: "ADD_ROUTE"
 }
 

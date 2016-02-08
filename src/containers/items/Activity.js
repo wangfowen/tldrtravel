@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { setEditId } from '../../actions'
+import { setEditId, editActivity } from '../../actions'
 import { getId, itemMode, AType, Mode } from '../../common'
 import EditActivity from '../../components/items/edit/EditActivity'
 import ViewActivity from '../../components/items/view/ViewActivity'
@@ -13,7 +13,7 @@ import ViewActivity from '../../components/items/view/ViewActivity'
 
 export default class Activity extends Component {
   render() {
-    const { category, id, onViewClick, editId, tripMode } = this.props
+    const { category, id, onViewClick, onEditChange, editId, tripMode } = this.props
 
     let activity
     if (itemMode(tripMode, editId, id) === Mode.Edit) {
@@ -21,7 +21,9 @@ export default class Activity extends Component {
         case AType.Other:
           //TODO: does this need key?
           activity = (
-            <EditActivity {...this.props} />
+            <EditActivity {...this.props}
+              onChange={(content) => onEditChange(id, content)}
+            />
           )
           break;
         default:
@@ -30,8 +32,15 @@ export default class Activity extends Component {
     } else {
       switch(category) {
         case AType.Other:
+          const { name, description, price, timeSpent } = this.props
+
           activity = (
-            <ViewActivity {...this.props}
+            <ViewActivity
+              name = { name || "Sample activity" }
+              description = { description || "This is the story of what went down during my trip!" }
+              price = { price || 10 }
+              timeSpent = { timeSpent || 3 }
+              {...this.props}
               onClick={() => onViewClick(id)}
             />
           )
@@ -48,9 +57,11 @@ export default class Activity extends Component {
 Activity.propTypes = {
   id: PropTypes.string.isRequired,
   tripMode: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
   onViewClick: PropTypes.func.isRequired,
+  onEditChange: PropTypes.func.isRequired,
   editId: PropTypes.string,
+
+  category: PropTypes.string.isRequired,
   name: PropTypes.string,
   geolocation: PropTypes.string,
   imageUrl: PropTypes.string,
@@ -68,7 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onViewClick: (id) => { dispatch(setEditId(id)) }
+    onViewClick: (id) => { dispatch(setEditId(id)) },
+    onEditChange: (id, content) => { dispatch(editActivity(id, content)) }
   }
 }
 

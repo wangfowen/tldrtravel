@@ -42,6 +42,7 @@ Text.propTypes = {
   onViewClick: PropTypes.func.isRequired,
   onEditChange: PropTypes.func.isRequired,
   onEditBlur: PropTypes.func.isRequired,
+
   editId: PropTypes.string,
   content: PropTypes.string
 }

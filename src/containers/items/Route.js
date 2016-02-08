@@ -49,9 +49,10 @@ export default class Route extends Component {
 Route.propTypes = {
   id: PropTypes.string.isRequired,
   tripMode: PropTypes.string.isRequired,
-  category: PropTypes.string.isRequired,
   onViewClick: PropTypes.func.isRequired,
   editId: PropTypes.string,
+
+  category: PropTypes.string.isRequired,
   name: PropTypes.string,
   price: PropTypes.number,
   timeSpent: PropTypes.number

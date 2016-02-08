@@ -24,11 +24,12 @@ class Day extends Component {
 
 Day.propTypes = {
   id: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired,
-  dayNum: PropTypes.number.isRequired,
+  tripMode: PropTypes.string.isRequired,
   addActivity: PropTypes.func.isRequired,
   addRoute: PropTypes.func.isRequired,
-  tripMode: PropTypes.string.isRequired,
+
+  items: PropTypes.array.isRequired,
+  dayNum: PropTypes.number.isRequired,
   description: PropTypes.string
 }
 

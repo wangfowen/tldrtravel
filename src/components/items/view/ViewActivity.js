@@ -22,11 +22,11 @@ const ViewActivity = ({ onClick, name, geolocation, imageUrl, description, price
       </Optional>
 
       <Optional condition={ price !== undefined }>
-        <p>Price: { price }</p>
+        <p>Price: ${ price }</p>
       </Optional>
 
       <Optional condition={ timeSpent !== undefined }>
-        <p>Time spent: { timeSpent }</p>
+        <p>Time spent: { timeSpent } hours</p>
       </Optional>
     </div>
   );
@@ -34,6 +34,7 @@ const ViewActivity = ({ onClick, name, geolocation, imageUrl, description, price
 
 ViewActivity.propTypes = {
   onClick: PropTypes.func.isRequired,
+
   name: PropTypes.string,
   geolocation: PropTypes.string,
   imageUrl: PropTypes.string,

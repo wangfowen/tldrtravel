@@ -30,6 +30,14 @@ export const addActivity = (dayId) => {
   }
 }
 
+export const editActivity = (id, content) => {
+  return {
+    type: Action.EditActivity,
+    id,
+    content
+  }
+}
+
 export const addRoute = (dayId, fromId, toId) => {
   return {
     type: Action.AddRoute,
