@@ -46,3 +46,11 @@ export const addRoute = (dayId, fromId, toId) => {
     toId
   }
 }
+
+export const editRoute = (id, content) => {
+  return {
+    type: Action.EditRoute,
+    id,
+    content
+  }
+}

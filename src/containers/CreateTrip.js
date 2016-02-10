@@ -6,7 +6,8 @@ import { setEditId, toggleMode } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
-    checked: state.meta.tripMode === Mode.View
+    checked: state.meta.tripMode === Mode.View,
+    mode: state.meta.tripMode
   }
 }
 

@@ -5,8 +5,8 @@ import Itinerary from '../containers/Itinerary'
 import ToggleButton from './helpers/ToggleButton'
 import "../../css/main.scss";
 
-const Trip = ({ onClick, onChange, checked }) => (
-  <div className="trip" onClick={(ev) => onClick(ev) }>
+const Trip = ({ onClick, onChange, checked, mode }) => (
+  <div className={"trip " + mode.toLowerCase() } onClick={(ev) => onClick(ev) }>
     <EditableHeader />
     <Itinerary />
     <ToggleButton checked={ checked }

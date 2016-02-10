@@ -32,7 +32,8 @@ Day.propTypes = {
   addActivity: PropTypes.func.isRequired,
   addRoute: PropTypes.func.isRequired,
 
-  items: PropTypes.array.isRequired,
+  activities: PropTypes.array.isRequired,
+  routes: PropTypes.array.isRequired,
   dayNum: PropTypes.number.isRequired,
   description: PropTypes.string
 }

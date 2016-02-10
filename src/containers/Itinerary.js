@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import Day from './items/Day'
+import AddButton from '../components/helpers/AddButton'
 import { addDay } from '../actions'
 import { Mode } from '../common'
 
@@ -9,15 +10,11 @@ class Itinerary extends Component {
   render() {
     const { days, tripMode, addDay } = this.props
 
-    let addDayButton = ""
-    if (tripMode === Mode.Edit) {
-      addDayButton = <button onClick={addDay}>Add Day</button>
-    }
-
     return (
       <div className="itinerary">
         { days.map(day => <Day key={ day.dayNum } { ...day } />) }
-        { addDayButton }
+        { tripMode === Mode.Edit &&
+          <AddButton onClick={ addDay } className="add-day">Add Day</AddButton> }
       </div>
     )
   }

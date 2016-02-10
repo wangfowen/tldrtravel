@@ -1,38 +1,29 @@
 import React, { PropTypes, Component } from 'react'
 
-import { mapItems } from '../../../common'
+import { organize, getId } from '../../../common'
 import Text from '../../../containers/items/Text'
+import AddButton from '../../helpers/AddButton'
 
 export default class EditDay extends Component {
   render() {
-    const { id, items, dayNum, description, addActivity, addRoute } = this.props
-    const addActivityButton = <button onClick={() => addActivity(id)}>Add Activity</button>
+    const { id, activities, routes, dayNum, description, addActivity, addRoute } = this.props
 
-    /*
-     TODO: how to generate route buttons - first store routes separately from activities
-
-    // routes: {[key: itemId,itemId]: Route}
-    const toDisplay = [items[0]];
-    for (let i = 1; i < items.length; i++) {
-      const left = items[i-1];
-      const right = items[i];
-      const route = routes[`${left.id},${right.id}`];
-      if (route) {
-        toDisplay.push(<RouteCopnent ..route);
-      } else {
-        toDisplay.push(<AddRoute>);
-      }
-      toDisplay.push(right);
-    }
-    */
-
+    //TODO: allow custom date instead of just day num - with date picker
     return (
-      //TODO: allow custom date instead of just day num - with date picker
       <div>
         <p>Day {dayNum}</p>
         <Text content={ description } id={ id } />
-        { mapItems(items) }
-        { addActivityButton }
+        {
+          organize(activities, routes, ( from, to) => {
+              return <AddButton
+                key={ "button-" + from.id }
+                className="add-route"
+                onClick={() => addRoute(id, from.id, to.id)}
+              >Add Route</AddButton>
+          })
+        }
+
+        <AddButton className="add-activity" onClick={() => addActivity(id)}>Add Activity</AddButton>
       </div>
     )
   }
@@ -40,7 +31,8 @@ export default class EditDay extends Component {
 
 EditDay.propTypes = {
   id: PropTypes.string.isRequired,
-  items: PropTypes.array.isRequired,
+  activities: PropTypes.array.isRequired,
+  routes: PropTypes.array.isRequired,
   dayNum: PropTypes.number.isRequired,
   addActivity: PropTypes.func.isRequired,
   addRoute: PropTypes.func.isRequired,

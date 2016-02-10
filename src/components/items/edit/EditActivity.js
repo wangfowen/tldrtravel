@@ -1,5 +1,7 @@
 import React, { PropTypes, Component } from 'react'
 
+import AddButton from '../../helpers/AddButton'
+
 class EditActivity extends Component {
   constructor() {
     super()
@@ -33,7 +35,7 @@ class EditActivity extends Component {
         <p>Price: <input ref={trackInput} name="price" type="text" defaultValue={ price } /></p>
         <p>Time spent: <input ref={trackInput} name="timeSpent" type="text" defaultValue={ timeSpent } /></p>
 
-        <button onClick={ this.saveActivity }>Save</button>
+        <AddButton onClick={ this.saveActivity } className="save">Save</AddButton>
       </div>
     )
   }

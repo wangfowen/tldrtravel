@@ -9,6 +9,7 @@ export default class EditText extends Component {
   render() {
     const {content, onChange, onBlur} = this.props
 
+    //TODO: how allow new lines?
     return (
       <textarea ref="text"
         value={content}

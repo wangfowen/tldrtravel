@@ -1,13 +1,28 @@
 import { Action, AType, IType, getId } from '../common'
 
 /*
- type: type of item - Route or Activity
+ type: type of item - route, activity, etc
  category: category within that type
  id: identifier for the item
 */
-const item = (state, action) => {
+const activity = (state, action) => {
   switch (action.type) {
     case Action.EditActivity:
+      if (action.id === state.id) {
+        return {...action.content,
+          id: state.id,
+          type: state.type,
+          category: state.category
+        }
+      } else return state
+    default:
+      return state
+  }
+}
+
+const route = (state, action) => {
+  switch (action.type) {
+    case Action.EditRoute:
       if (action.id === state.id) {
         return {...action.content,
           id: state.id,
@@ -36,12 +51,13 @@ const day = (state, action) => {
         }
       } else {
         return {...state,
-          items: state.items.map(i => item(i, action))
+          activities: state.activities.map(a => activity(a, action)),
+          routes: state.routes.map(r => route(r, action))
         }
       }
     case Action.AddActivity:
       return {...state,
-        items: [...state.items, {
+        activities: [...state.activities, {
           id: getId(),
           type: IType.Activity,
           category: AType.Other
@@ -50,15 +66,18 @@ const day = (state, action) => {
     case Action.AddRoute:
       //TODO: this has to go in the right spot
       return {...state,
-        items: [...state.items, {
+        routes: [...state.routes, {
           id: getId(),
           type: IType.Route,
-          category: AType.Other
+          category: AType.Other,
+          fromId: action.fromId,
+          toId: action.toId
         }]
       }
     default:
       return {...state,
-        items: state.items.map(i => item(i, action))
+        activities: state.activities.map(a => activity(a, action)),
+        routes: state.routes.map(r => route(r, action))
       }
   }
 }
@@ -76,7 +95,8 @@ const itinerary = (state = {
         days: [...state.days, {
           id: "day-" + (state.days.length + 1),
           dayNum: state.days.length + 1,
-          items: []
+          activities: [],
+          routes: []
         }]
       }
     case Action.AddActivity:

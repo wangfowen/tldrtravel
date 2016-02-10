@@ -2,12 +2,13 @@ import React from 'react'
 
 import Activity from './containers/items/Activity'
 import Route from './containers/items/Route'
+import AddButton from './components/helpers/AddButton'
 
 let nextItemId = 0
 
 //TODO: make this work properly such that it assigns incremental ids, starting from latest already existing - store in global state latest id
 export const getId = () => {
-  return Math.random().toString()
+  return ("id-" + nextItemId++)
 };
 
 export const itemMode = (tripMode, editId, itemId) => {
@@ -26,7 +27,8 @@ export const Action = {
   AddDay: "ADD_DAY",
   AddActivity: "ADD_ACTIVITY",
   EditActivity: "EDIT_ACTIVITY",
-  AddRoute: "ADD_ROUTE"
+  AddRoute: "ADD_ROUTE",
+  EditRoute: "EDIT_ROUTE",
 }
 
 //type of item
@@ -50,15 +52,35 @@ export const RType = {
   Other: "OTHER"
 }
 
-export const mapItems = (items) => {
-  return items.map(item => {
-    switch (item.type) {
-      case IType.Activity:
-        return (<Activity key={ item.id } { ...item } />)
-      case IType.Route:
-        return (<Route key={ item.id } { ...item } />)
-      default:
-        return null
+export const organize = (activities, routes, callback) => {
+  if (activities.length === 0) { return null }
+
+  const pairToRoute = {};
+  routes.forEach(route => {
+    pairToRoute[`${route.fromId},${route.toId}`] = route;
+  });
+
+  const items = [];
+
+  for (let i = 0; i < activities.length - 1; i++) {
+    const from = activities[i];
+    const to = activities[i+1];
+
+    items.push(<Activity key={ from.id } { ...from } />);
+
+    const route = pairToRoute[`${from.id},${to.id}`];
+    if (route) {
+      items.push(<Route key={ route.id } { ...route } />);
+    } else {
+      const separator = callback && callback(from, to);
+      if (separator) {
+        items.push(separator);
+      }
     }
-  })
+  }
+
+  const last = activities[activities.length - 1];
+  items.push(<Activity key={ last.id } { ...last } />);
+
+  return items
 }

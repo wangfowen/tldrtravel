@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
 html, body {
   margin: 0;
   height: 100%;
@@ -21,6 +26,16 @@ html, body {
   position: fixed;
   top: 0;
   right: 0;
+}
+
+.edit {
+  .text {
+    border: 1px dashed #ddd;
+  }
+
+  .activity {
+    border: 1px dashed #ddd;
+  }
 }
 
 .itinerary {
