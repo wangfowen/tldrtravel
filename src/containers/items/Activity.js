@@ -15,11 +15,10 @@ export default class Activity extends Component {
   render() {
     const { category, id, onViewClick, onEditSave, editId, tripMode } = this.props
 
-    let activity
     if (itemMode(tripMode, editId, id) === Mode.Edit) {
       switch(category) {
         case AType.Other:
-          activity = (
+          return (
             <div className="activity">
               <EditActivity {...this.props}
                 onSave={(content) => onEditSave(id, content)}
@@ -28,14 +27,14 @@ export default class Activity extends Component {
           )
           break;
         default:
-          activity = null
+          return null
       }
     } else {
       switch(category) {
         case AType.Other:
           const { name, description, price, timeSpent } = this.props
 
-          activity = (
+          return (
             <div className="activity">
               <ViewActivity
                 name = { name || "Sample activity" }
@@ -49,11 +48,9 @@ export default class Activity extends Component {
           )
           break;
         default:
-          activity = null
+          return null
       }
     }
-
-    return activity
   }
 }
 
