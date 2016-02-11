@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 
 import Trip from '../components/Trip'
 import { Mode } from '../common.js'
-import { setEditId, toggleMode } from '../actions'
+import { setEditId, toggleMode, reset } from '../actions'
 
 const mapStateToProps = (state) => {
   return {
@@ -13,11 +13,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onClick: (ev) => {
+    onBodyClick: (ev) => {
       if (ev.target === ev.currentTarget) {
         dispatch(setEditId(null))
       }
     },
+    onClearClick: () => { dispatch(reset()) },
     onChange: () => { dispatch(toggleMode()) }
   }
 }

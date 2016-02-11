@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { Mode, getId, itemMode } from '../../common'
+import { Mode, itemMode } from '../../common'
 import { editText, setEditId } from '../../actions'
 import ViewText from '../../components/items/view/ViewText'
 import EditText from '../../components/items/edit/EditText'

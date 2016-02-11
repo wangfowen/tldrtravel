@@ -24,8 +24,14 @@ html, body {
 
 .preview-button {
   position: fixed;
-  top: 0;
-  right: 0;
+  top: 5px;
+  right: 5px;
+}
+
+.clear-button {
+  position: fixed;
+  top: 30px;
+  right: 5px;
 }
 
 .edit {

@@ -4,12 +4,17 @@ import Activity from './containers/items/Activity'
 import Route from './containers/items/Route'
 import AddButton from './components/helpers/AddButton'
 
-let nextItemId = 0
 
-//TODO: make this work properly such that it assigns incremental ids, starting from latest already existing - store in global state latest id
 export const getId = () => {
-  return ("id-" + nextItemId++)
-};
+  let d = new Date().getTime()
+  const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    let r = (d + Math.random() * 16) % 16 | 0
+    d = Math.floor(d / 16)
+    return (c == 'x' ? r : (r&0x3|0x8)).toString(16)
+  })
+
+  return uuid
+}
 
 export const itemMode = (tripMode, editId, itemId) => {
     return (tripMode === Mode.Edit && editId === itemId) ? Mode.Edit : Mode.View
@@ -23,6 +28,7 @@ export const Mode = {
 export const Action = {
   EditText: "EDIT_TEXT",
   ToggleMode: "TOGGLE_MODE",
+  Reset: "RESET",
   SetEditId: "SET_EDIT_ID",
   AddDay: "ADD_DAY",
   AddActivity: "ADD_ACTIVITY",

@@ -64,7 +64,6 @@ const day = (state, action) => {
         }]
       }
     case Action.AddRoute:
-      //TODO: this has to go in the right spot
       return {...state,
         routes: [...state.routes, {
           id: getId(),
@@ -110,6 +109,10 @@ const itinerary = (state = {
         days: state.days.map(d => {
           return action.dayId === d.id ? day(d, action) : d
         })
+      }
+    case Action.Reset:
+      return {
+        days: []
       }
     default:
       return {...state,

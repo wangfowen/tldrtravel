@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import { setEditId } from '../../actions'
-import { getId, itemMode, RType, Mode } from '../../common'
+import { itemMode, RType, Mode } from '../../common'
 import EditRoute from '../../components/items/edit/EditRoute'
 import ViewRoute from '../../components/items/view/ViewRoute'
 

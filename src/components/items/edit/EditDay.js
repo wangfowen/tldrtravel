@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 
-import { organize, getId } from '../../../common'
+import { organize } from '../../../common'
 import Text from '../../../containers/items/Text'
 import AddButton from '../../helpers/AddButton'
 

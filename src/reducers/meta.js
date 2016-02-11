@@ -8,11 +8,13 @@ import { Mode, Action } from '../common'
   editId: current node being edited
 */
 
-const meta = (state = {
+const defaultMeta = {
   title: "My Adventure",
   author: "Author",
   tripMode: Mode.Edit
-}, action) => {
+}
+
+const meta = (state = defaultMeta, action) => {
 
   switch (action.type) {
     case Action.EditText:
@@ -29,6 +31,8 @@ const meta = (state = {
       return {...state,
         editId: action.id
       }
+    case Action.Reset:
+      return defaultMeta
     case Action.ToggleMode:
       const newTripMode = state.tripMode === Mode.Edit ? Mode.View : Mode.Edit
 

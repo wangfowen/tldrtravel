@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import { setEditId, editActivity } from '../../actions'
-import { getId, itemMode, AType, Mode } from '../../common'
+import { itemMode, AType, Mode } from '../../common'
 import EditActivity from '../../components/items/edit/EditActivity'
 import ViewActivity from '../../components/items/view/ViewActivity'
 
