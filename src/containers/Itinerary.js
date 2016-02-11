@@ -2,6 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
 import Day from './items/Day'
+import Button from '../components/helpers/Button'
 import { addDay } from '../actions'
 import { Mode } from '../common'
 

@@ -2,7 +2,7 @@ import React from 'react'
 
 import Activity from './containers/items/Activity'
 import Route from './containers/items/Route'
-import AddButton from './components/helpers/AddButton'
+import Button from './components/helpers/Button'
 
 
 export const getId = () => {
