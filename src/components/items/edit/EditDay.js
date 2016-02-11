@@ -2,7 +2,7 @@ import React, { PropTypes, Component } from 'react'
 
 import { organize } from '../../../common'
 import Text from '../../../containers/items/Text'
-import AddButton from '../../helpers/AddButton'
+import Button from '../../helpers/Button'
 
 export default class EditDay extends Component {
   render() {
@@ -15,15 +15,15 @@ export default class EditDay extends Component {
         <Text content={ description } id={ id } />
         {
           organize(activities, routes, ( from, to) => {
-              return <AddButton
+              return <Button
                 key={ "button-" + from.id }
                 className="add-route"
                 onClick={() => addRoute(id, from.id, to.id)}
-              >Add Route</AddButton>
+              >Add Route</Button>
           })
         }
 
-        <AddButton className="add-activity" onClick={() => addActivity(id)}>Add Activity</AddButton>
+        <Button className="add-activity" onClick={() => addActivity(id)}>Add Activity</Button>
       </div>
     )
   }

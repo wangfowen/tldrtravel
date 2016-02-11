@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { setEditId, editRoute } from '../../actions'
+import { setEditId, editRoute, deleteRoute } from '../../actions'
 import { itemMode, RType, Mode } from '../../common'
 import EditRoute from '../../components/items/edit/EditRoute'
 import ViewRoute from '../../components/items/view/ViewRoute'
@@ -32,12 +32,14 @@ export default class Route extends Component {
     } else {
       switch(category) {
         case RType.Other:
-          const { name, description, price, timeSpent } = this.props
+          const { name, description, price, timeSpent, onViewDelete } = this.props
+          const onDelete = tripMode === Mode.Edit ? () => onViewDelete(id) : null
 
           return (
             <div className="route">
               <ViewRoute
                 onClick={() => onViewClick(id)}
+                onDelete={ onDelete }
                 name = { name || "Sample route" }
                 description = { description || "This is the route we took" }
                 price = { price || 5 }
@@ -57,6 +59,8 @@ Route.propTypes = {
   id: PropTypes.string.isRequired,
   tripMode: PropTypes.string.isRequired,
   onViewClick: PropTypes.func.isRequired,
+  onEditSave: PropTypes.func.isRequired,
+  onViewDelete: PropTypes.func.isRequired,
   fromId: PropTypes.string.isRequired,
   toId: PropTypes.string.isRequired,
   editId: PropTypes.string,
@@ -78,6 +82,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onViewClick: (id) => { dispatch(setEditId(id)) },
+    onViewDelete: (id) => { dispatch(deleteRoute(id)) },
     onEditSave: (id, content) => {
       dispatch(editRoute(id, content))
       dispatch(setEditId(null))

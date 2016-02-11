@@ -42,6 +42,13 @@ export const editActivity = (id, content) => {
   }
 }
 
+export const deleteActivity = (id) => {
+  return {
+    type: Action.DeleteActivity,
+    id
+  }
+}
+
 export const addRoute = (dayId, fromId, toId) => {
   return {
     type: Action.AddRoute,
@@ -56,5 +63,12 @@ export const editRoute = (id, content) => {
     type: Action.EditRoute,
     id,
     content
+  }
+}
+
+export const deleteRoute = (id) => {
+  return {
+    type: Action.DeleteRoute,
+    id
   }
 }

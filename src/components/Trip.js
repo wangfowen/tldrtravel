@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 import EditableHeader from '../containers/EditableHeader'
 import Itinerary from '../containers/Itinerary'
 import ToggleButton from './helpers/ToggleButton'
-import AddButton from './helpers/AddButton'
+import Button from './helpers/Button'
 import "../../css/main.scss";
 
 const Trip = ({ onBodyClick, onClearClick, onChange, checked, mode }) => (
@@ -15,7 +15,7 @@ const Trip = ({ onBodyClick, onClearClick, onChange, checked, mode }) => (
       onChange={() => onChange() }>
       Preview
     </ToggleButton>
-    <AddButton onClick={ onClearClick } className="clear-button">Clear draft</AddButton>
+    <Button onClick={ onClearClick } className="clear-button">Clear draft</Button>
   </div>
 )
 

@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 
-import { setEditId, editActivity } from '../../actions'
+import { setEditId, editActivity, deleteActivity } from '../../actions'
 import { itemMode, AType, Mode } from '../../common'
 import EditActivity from '../../components/items/edit/EditActivity'
 import ViewActivity from '../../components/items/view/ViewActivity'
@@ -32,7 +32,8 @@ export default class Activity extends Component {
     } else {
       switch(category) {
         case AType.Other:
-          const { name, description, price, timeSpent } = this.props
+          const { name, description, price, timeSpent, onViewDelete } = this.props
+          const onDelete = tripMode === Mode.Edit ? () => onViewDelete(id) : null
 
           return (
             <div className="activity">
@@ -43,6 +44,7 @@ export default class Activity extends Component {
                 timeSpent = { timeSpent || 3 }
                 {...this.props}
                 onClick={() => onViewClick(id)}
+                onDelete={ onDelete }
               />
             </div>
           )
@@ -59,6 +61,7 @@ Activity.propTypes = {
   tripMode: PropTypes.string.isRequired,
   onViewClick: PropTypes.func.isRequired,
   onEditSave: PropTypes.func.isRequired,
+  onViewDelete: PropTypes.func.isRequired,
   editId: PropTypes.string,
 
   category: PropTypes.string.isRequired,
@@ -80,6 +83,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onViewClick: (id) => { dispatch(setEditId(id)) },
+    onViewDelete: (id) => { dispatch(deleteActivity(id)) },
     onEditSave: (id, content) => {
       dispatch(editActivity(id, content))
       dispatch(setEditId(null))

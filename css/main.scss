@@ -58,5 +58,15 @@ html, body {
     .activity {
       margin: 15px 0;
     }
+
+    .activity, .route {
+      position: relative;
+    }
+
+    .delete-button {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 }

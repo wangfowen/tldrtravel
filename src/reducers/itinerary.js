@@ -1,7 +1,6 @@
-import { Action, AType, IType, getId } from '../common'
+import { Action, AType, RType, getId } from '../common'
 
 /*
- type: type of item - route, activity, etc
  category: category within that type
  id: identifier for the item
 */
@@ -11,7 +10,6 @@ const activity = (state, action) => {
       if (action.id === state.id) {
         return {...action.content,
           id: state.id,
-          type: state.type,
           category: state.category
         }
       } else return state
@@ -26,7 +24,6 @@ const route = (state, action) => {
       if (action.id === state.id) {
         return {...action.content,
           id: state.id,
-          type: state.type,
           category: state.category
         }
       } else return state
@@ -59,7 +56,6 @@ const day = (state, action) => {
       return {...state,
         activities: [...state.activities, {
           id: getId(),
-          type: IType.Activity,
           category: AType.Other
         }]
       }
@@ -67,11 +63,19 @@ const day = (state, action) => {
       return {...state,
         routes: [...state.routes, {
           id: getId(),
-          type: IType.Route,
-          category: AType.Other,
+          category: RType.Other,
           fromId: action.fromId,
           toId: action.toId
         }]
+      }
+    case Action.DeleteActivity:
+      return {...state,
+        activities: state.activities.filter(r => r.id !== action.id),
+        routes: state.routes.filter(r => r.fromId !== action.id && r.toId !== action.id)
+      }
+    case Action.DeleteRoute:
+      return {...state,
+        routes: state.routes.filter(r => r.id !== action.id)
       }
     default:
       return {...state,

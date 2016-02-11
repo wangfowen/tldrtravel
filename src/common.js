@@ -33,14 +33,10 @@ export const Action = {
   AddDay: "ADD_DAY",
   AddActivity: "ADD_ACTIVITY",
   EditActivity: "EDIT_ACTIVITY",
+  DeleteActivity: "DELETE_ACTIVITY",
   AddRoute: "ADD_ROUTE",
   EditRoute: "EDIT_ROUTE",
-}
-
-//type of item
-export const IType = {
-  Activity: "ACTIVITY",
-  Route: "ROUTE"
+  DeleteRoute: "DELETE_ROUTE"
 }
 
 //type of activity
