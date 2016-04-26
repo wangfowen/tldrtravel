@@ -8,7 +8,7 @@ class EditRoute extends Component {
     this._inputs = []
   }
 
-  saveRoute = () => {
+  saveRoute() {
     const content = {
       fromId: this.props.fromId,
       toId: this.props.toId

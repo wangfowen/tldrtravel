@@ -8,7 +8,7 @@ class EditActivity extends Component {
     this._inputs = []
   }
 
-  saveActivity = () => {
+  saveActivity() {
     const content = {};
     this._inputs.forEach(el => {
       const value = el.value
