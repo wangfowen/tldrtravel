@@ -23,14 +23,18 @@ export const setEditId = (id) => {
   }
 }
 
-export const addDay = () => {
-  return { type: Action.AddDay }
+export const addDay = (id) => {
+  return {
+    type: Action.AddDay,
+    id
+  }
 }
 
-export const addActivity = (dayId) => {
+export const addActivity = (dayId, id) => {
   return {
     type: Action.AddActivity,
-    dayId
+    dayId,
+    id
   }
 }
 
@@ -49,12 +53,13 @@ export const deleteActivity = (id) => {
   }
 }
 
-export const addRoute = (dayId, fromId, toId) => {
+export const addRoute = (dayId, fromId, toId, id) => {
   return {
     type: Action.AddRoute,
     dayId,
     fromId,
-    toId
+    toId,
+    id
   }
 }
 

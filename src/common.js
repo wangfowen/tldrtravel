@@ -41,7 +41,8 @@ export const Action = {
 
 //type of activity
 export const AType = {
-  Other: "OTHER"
+  Other: "OTHER",
+  Nature: "NATURE"
 }
 
 //type of route

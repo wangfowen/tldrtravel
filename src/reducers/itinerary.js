@@ -54,19 +54,11 @@ const day = (state, action) => {
       }
     case Action.AddActivity:
       return {...state,
-        activities: [...state.activities, {
-          id: getId(),
-          category: AType.Other
-        }]
+        activities: [...state.activities, mkActivity(action.id)]
       }
     case Action.AddRoute:
       return {...state,
-        routes: [...state.routes, {
-          id: getId(),
-          category: RType.Other,
-          fromId: action.fromId,
-          toId: action.toId
-        }]
+        routes: [...state.routes, mkRoute(action.fromId, action.toId, action.id)]
       }
     case Action.DeleteActivity:
       return {...state,
@@ -88,19 +80,12 @@ const day = (state, action) => {
 /*
   days: array of days
 */
-const itinerary = (state = {
-  days: []
-}, action) => {
+export const itinerary = (state = mkItinerary(), action) => {
 
   switch (action.type) {
     case Action.AddDay:
       return {...state,
-        days: [...state.days, {
-          id: "day-" + (state.days.length + 1),
-          dayNum: state.days.length + 1,
-          activities: [],
-          routes: []
-        }]
+        days: [...state.days, mkDay(state.days.length, action.id)]
       }
     case Action.AddActivity:
       return {...state,
@@ -115,9 +100,7 @@ const itinerary = (state = {
         })
       }
     case Action.Reset:
-      return {
-        days: []
-      }
+      return mkItinerary()
     default:
       return {...state,
         days: state.days.map(d => day(d, action))
@@ -125,4 +108,32 @@ const itinerary = (state = {
   }
 }
 
-export default itinerary
+export const mkRoute = (fromId, toId, routeId = undefined, category = undefined) => {
+  return {
+    id: routeId || getId(),
+    category: category || RType.Other,
+    fromId,
+    toId
+  }
+}
+
+export const mkActivity = (activityId = undefined, category = undefined) => {
+  return {
+    id: activityId || getId(),
+    category: category || AType.Other
+  }
+}
+
+export const mkDay = (numDays, dayId = undefined, activities = [], routes = [], description = "") => {
+  return {
+    id: dayId || getId(),
+    dayNum: numDays + 1,
+    activities,
+    routes,
+    description
+  }
+}
+
+export const mkItinerary = (days = []) => {
+  return { days }
+}
