@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-import { organize } from '../../../common'
+import { organize, genMap } from '../../../common'
 import Text from '../../../containers/items/Text'
 
 const ViewDay = ({ id, activities, routes, dayNum, description }) => {
@@ -8,6 +8,7 @@ const ViewDay = ({ id, activities, routes, dayNum, description }) => {
       <div>
         <p>Day {dayNum}</p>
         <Text content={ description } id={ id } />
+        { genMap(activities) }
         { organize(activities, routes) }
       </div>
   );

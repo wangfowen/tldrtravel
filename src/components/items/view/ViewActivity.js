@@ -16,7 +16,7 @@ const ViewActivity = ({ onClick, name, geolocation, imageUrl, description, price
 
 ViewActivity.propTypes = {
   onClick: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
 
   name: PropTypes.string,
   geolocation: PropTypes.string,

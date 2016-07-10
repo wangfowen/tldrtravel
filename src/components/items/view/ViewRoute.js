@@ -14,7 +14,7 @@ const ViewRoute = ({ onClick, onDelete, name, description, price, timeSpent }) =
 
 ViewRoute.propTypes = {
   onClick: PropTypes.func.isRequired,
-  onDelete: PropTypes.func.isRequired,
+  onDelete: PropTypes.func,
 
   name: PropTypes.string,
   description: PropTypes.string,

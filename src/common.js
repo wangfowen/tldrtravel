@@ -3,6 +3,7 @@ import React from 'react'
 import Activity from './containers/items/Activity'
 import Route from './containers/items/Route'
 import Button from './components/helpers/Button'
+import Map from './components/Map'
 
 
 export const getId = () => {
@@ -55,13 +56,16 @@ export const RType = {
   Other: "OTHER"
 }
 
+//we don't want to render routes for now
 export const organize = (activities, routes, callback) => {
   if (activities.length === 0) { return null }
 
+  /*
   const pairToRoute = {};
   routes.forEach(route => {
     pairToRoute[`${route.fromId},${route.toId}`] = route;
   });
+  */
 
   const items = [];
 
@@ -71,6 +75,7 @@ export const organize = (activities, routes, callback) => {
 
     items.push(<Activity key={ from.id } { ...from } />);
 
+    /*
     const route = pairToRoute[`${from.id},${to.id}`];
     if (route) {
       items.push(<Route key={ route.id } { ...route } />);
@@ -80,10 +85,15 @@ export const organize = (activities, routes, callback) => {
         items.push(separator);
       }
     }
+    */
   }
 
   const last = activities[activities.length - 1];
   items.push(<Activity key={ last.id } { ...last } />);
 
   return items
+}
+
+export const genMap = (activities) => {
+   return <Map />;
 }
