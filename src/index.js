@@ -11,15 +11,30 @@ import trip from './reducers';
 
 const history = createHashHistory();
 
-let store = localStorage.draftTrip ? createStore(trip, JSON.parse(localStorage.draftTrip)) : createStore(trip);
+const config = {
+  apiKey: "AIzaSyDCC1Y_GRuaXYNP9nF8mmB5RVCiLxdBLoA",
+  authDomain: "tldrtravel.firebaseapp.com",
+  databaseURL: "https://tldrtravel.firebaseio.com",
+  storageBucket: "tldrtravel.appspot.com",
+};
 
-store.subscribe(() =>
-  localStorage.setItem("draftTrip", JSON.stringify(store.getState()))
-)
+firebase.initializeApp(config);
 
-render(
-  <Provider store={store}>
-    <Router history={history} >{Routes}</Router>
-  </Provider>,
-  document.getElementById('root')
-);
+let store = null;
+
+firebase.database().ref("test").once('value').then(function(snapshot) {
+  store = localStorage.draftTrip ? createStore(trip, JSON.parse(localStorage.draftTrip)) : (
+    snapshot.val() ? createStore(trip, snapshot.val()) : createStore(trip)
+  );
+
+  store.subscribe(() =>
+    localStorage.setItem("draftTrip", JSON.stringify(store.getState())))
+
+  render(
+    <Provider store={store}>
+      <Router history={history} >{Routes}</Router>
+    </Provider>,
+    document.getElementById('root')
+  );
+});
+

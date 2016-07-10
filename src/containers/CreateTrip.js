@@ -7,7 +7,11 @@ import { setEditId, toggleMode, reset } from '../actions'
 const mapStateToProps = (state) => {
   return {
     checked: state.meta.tripMode === Mode.View,
-    mode: state.meta.tripMode
+    mode: state.meta.tripMode,
+    onSaveClick: () => {
+      //TODO: once we have auth, set the state for the correct user
+      firebase.database().ref("test").set(state);
+    }
   }
 }
 

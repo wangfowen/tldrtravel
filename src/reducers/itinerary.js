@@ -48,8 +48,8 @@ const day = (state, action) => {
         }
       } else {
         return {...state,
-          activities: state.activities.map(a => activity(a, action)),
-          routes: state.routes.map(r => route(r, action))
+          activities: (state.activities || []).map(a => activity(a, action)),
+          routes: (state.routes || []).map(r => route(r, action))
         }
       }
     case Action.AddActivity:
@@ -62,17 +62,17 @@ const day = (state, action) => {
       }
     case Action.DeleteActivity:
       return {...state,
-        activities: state.activities.filter(r => r.id !== action.id),
-        routes: state.routes.filter(r => r.fromId !== action.id && r.toId !== action.id)
+        activities: (state.activities || []).filter(r => r.id !== action.id),
+        routes: (state.routes || []).filter(r => r.fromId !== action.id && r.toId !== action.id)
       }
     case Action.DeleteRoute:
       return {...state,
-        routes: state.routes.filter(r => r.id !== action.id)
+        routes: (state.routes || []).filter(r => r.id !== action.id)
       }
     default:
       return {...state,
-        activities: state.activities.map(a => activity(a, action)),
-        routes: state.routes.map(r => route(r, action))
+        activities: (state.activities || []).map(a => activity(a, action)),
+        routes: (state.routes || []).map(r => route(r, action))
       }
   }
 }
@@ -89,13 +89,13 @@ export const itinerary = (state = mkItinerary(), action) => {
       }
     case Action.AddActivity:
       return {...state,
-        days: state.days.map(d => {
+        days: (state.days || []).map(d => {
           return action.dayId === d.id ? day(d, action) : d
         })
       }
     case Action.AddRoute:
       return {...state,
-        days: state.days.map(d => {
+        days: (state.days || []).map(d => {
           return action.dayId === d.id ? day(d, action) : d
         })
       }
@@ -103,7 +103,7 @@ export const itinerary = (state = mkItinerary(), action) => {
       return mkItinerary()
     default:
       return {...state,
-        days: state.days.map(d => day(d, action))
+        days: (state.days || []).map(d => day(d, action))
       }
   }
 }

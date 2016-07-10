@@ -41,6 +41,14 @@ describe('day reducer', () => {
     })).toEqual(mkItinerary([mkDay(0, "0", [mkActivity("0")])]))
   })
 
+  it('should handle adding first activity for a day with undefined activity', () => {
+    expect(itinerary(mkItinerary([mkDay(0, "0", undefined)]), {
+      type: Action.AddActivity,
+      dayId: "0",
+      id: "0"
+    })).toEqual(mkItinerary([mkDay(0, "0", [mkActivity("0")])]))
+  })
+
   it('should handle adding another activity for a day', () => {
     expect(itinerary(testItinerary(), {
         type: Action.AddActivity,
@@ -57,6 +65,16 @@ describe('day reducer', () => {
 
   it('should handle adding first route for a day', () => {
     expect(itinerary(mkItinerary([mkDay(0, "0")]), {
+      type: Action.AddRoute,
+      dayId: "0",
+      id: "0",
+      fromId: "0",
+      toId: "1"
+    })).toEqual(mkItinerary([mkDay(0, "0", [], [mkRoute("0", "1", "0")])]))
+  })
+
+  it('should handle adding first route for a day with undefined route', () => {
+    expect(itinerary(mkItinerary([mkDay(0, "0", [], undefined)]), {
       type: Action.AddRoute,
       dayId: "0",
       id: "0",
